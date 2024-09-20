@@ -14,7 +14,7 @@ public class MoodAnalyzerTest {
         assertEquals("SAD", mood);
     }
 
-    // TC1.2: Given “I am in Any Mood” message should return HAPPY
+    // TC1.2: Given :  "I am in Any Mood" message should return HAPPY
     @Test
     public void givenAnyMoodMessage_ShouldReturnHappyMood() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
