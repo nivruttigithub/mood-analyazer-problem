@@ -13,7 +13,6 @@ public class MoodAnalyzer {
     public static void main(String[] args) {
 
         MoodAnalyzer moodAnalyser = new MoodAnalyzer();
-
         String message = "I am feeling so sad today!";
         String mood = moodAnalyser.analyseMood(message);
 
