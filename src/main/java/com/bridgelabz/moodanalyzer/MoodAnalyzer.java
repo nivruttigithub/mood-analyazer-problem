@@ -3,8 +3,8 @@ package com.bridgelabz.moodanalyzer;
 public class MoodAnalyzer {
     public String analyseMood(String message) {
 
-        if (message.contains("Sad")) {
-            return "Sad";
+        if (message.toLowerCase().contains("sad")) {
+            return "SAD";
         } else {
             return "Happy";
         }
@@ -13,7 +13,7 @@ public class MoodAnalyzer {
     public static void main(String[] args) {
 
         MoodAnalyzer moodAnalyser = new MoodAnalyzer();
-        String message = "I am feeling so sad today!";
+        String message = "I am in Sad Mood!";
         String mood = moodAnalyser.analyseMood(message);
 
         System.out.println("Mood: " + mood);
