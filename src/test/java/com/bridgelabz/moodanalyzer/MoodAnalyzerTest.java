@@ -3,46 +3,36 @@ package com.bridgelabz.moodanalyzer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MoodAnalyzerTest {
     //TC1.1 : Given “I am in Sad Mood” message Should Return SAD
     @Test
-    public void givenSadMoodMessage_ShouldReturnSadMood(){
-        MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-        String message = "I am in Sad Mood";
-        String mood = moodAnalyzer.analyseMood(message);
+    public void givenSadMoodMessage_ShouldReturnSadMood() throws MoodAnalysisException {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
+        String mood = moodAnalyzer.analyseMood();
         assertEquals("SAD", mood);
     }
-
     // TC1.2: Given :  "I am in Any Mood" message should return HAPPY
     @Test
-    public void givenAnyMoodMessage_ShouldReturnHappyMood() {
-        MoodAnalyzer moodAnalyzer = new MoodAnalyzer();
-        String message = "I am in Any Mood";
-        String mood = moodAnalyzer.analyseMood(message);
-        assertEquals("HAPPY", mood);
-    }
-    // Repeat : TC1.1 : Given “I am in Sad Mood” message in Constructor Should Return SAD
-    @Test
-    public void givenSadMoodMessageInConstructor_ShouldReturnSadMood() {
-
-        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Sad Mood");
-
-        String mood = moodAnalyzer.analyseMood();
-
-        assertEquals("SAD", mood);
-    }
-    @Test
-    public void givenHappyMoodMessageInConstructor_ShouldReturnHappyMood() {
+    public void givenHappyMoodMessage_ShouldReturnHappyMood() throws MoodAnalysisException {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer("I am in Happy Mood");
         String mood = moodAnalyzer.analyseMood();
         assertEquals("HAPPY", mood);
     }
-    // TC2.1: Given Null Mood Should Return HAPPY
+
+    // Test: Null mood should throw MoodAnalysisException for EMPTY_MOOD
     @Test
-    public void givenNullMood_ShouldReturnHappyMood() {
+    public void givenNullMood_ShouldThrowNullMoodException() {
         MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
-        String mood = moodAnalyzer.analyseMood(null);
-        assertEquals("HAPPY", mood);
+        MoodAnalysisException exception = assertThrows(MoodAnalysisException.class, moodAnalyzer::analyseMood);
+        assertEquals(MoodAnalysisErrorType.NULL_MOOD, exception.getErrorType());
+    }
+    //Empty mood should throw MoodAnalysisException for EMPTY_MOOD
+    @Test
+    public void givenEmptyMood_ShouldThrowEmptyMoodException() {
+        MoodAnalyzer moodAnalyzer = new MoodAnalyzer("");
+        MoodAnalysisException exception = assertThrows(MoodAnalysisException.class, moodAnalyzer::analyseMood);
+        assertEquals(MoodAnalysisErrorType.EMPTY_MOOD, exception.getErrorType());
     }
 }
