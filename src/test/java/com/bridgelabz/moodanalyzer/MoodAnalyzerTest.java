@@ -28,6 +28,7 @@ public class MoodAnalyzerTest {
         MoodAnalysisException exception = assertThrows(MoodAnalysisException.class, moodAnalyzer::analyseMood);
         assertEquals(MoodAnalysisErrorType.NULL_MOOD, exception.getErrorType());
     }
+    
     //Empty mood should throw MoodAnalysisException for EMPTY_MOOD
     @Test
     public void givenEmptyMood_ShouldThrowEmptyMoodException() {
